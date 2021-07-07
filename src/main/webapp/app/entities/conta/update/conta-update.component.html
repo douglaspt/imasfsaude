@@ -1,0 +1,95 @@
+<div class="row justify-content-center">
+  <div class="col-8">
+    <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+      <h2 id="jhi-conta-heading" data-cy="ContaCreateUpdateHeading" jhiTranslate="imasfsaudeApp.conta.home.createOrEditLabel">
+        Create or edit a Conta
+      </h2>
+
+      <div>
+        <jhi-alert-error></jhi-alert-error>
+
+        <div class="form-group" [hidden]="editForm.get('id')!.value == null">
+          <label class="form-control-label" jhiTranslate="imasfsaudeApp.conta.id" for="field_id">Id</label>
+          <input type="number" class="form-control" name="id" id="field_id" data-cy="id" formControlName="id" [readonly]="true" />
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="imasfsaudeApp.conta.competencia" for="field_competencia">Competencia</label>
+          <div class="input-group">
+            <input
+              id="field_competencia"
+              data-cy="competencia"
+              type="text"
+              class="form-control"
+              name="competencia"
+              ngbDatepicker
+              #competenciaDp="ngbDatepicker"
+              formControlName="competencia"
+            />
+            <span class="input-group-append">
+              <button type="button" class="btn btn-secondary" (click)="competenciaDp.toggle()">
+                <fa-icon icon="calendar-alt"></fa-icon>
+              </button>
+            </span>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="imasfsaudeApp.conta.status" for="field_status">Status</label>
+          <select class="form-control" name="status" formControlName="status" id="field_status" data-cy="status">
+            <option [ngValue]="null">{{ 'imasfsaudeApp.StatusPagamento.null' | translate }}</option>
+            <option value="PENDENTE">{{ 'imasfsaudeApp.StatusPagamento.PENDENTE' | translate }}</option>
+            <option value="PAGO">{{ 'imasfsaudeApp.StatusPagamento.PAGO' | translate }}</option>
+            <option value="CANCELADO">{{ 'imasfsaudeApp.StatusPagamento.CANCELADO' | translate }}</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="imasfsaudeApp.conta.beneficiario" for="field_beneficiario">Beneficiario</label>
+          <select class="form-control" id="field_beneficiario" data-cy="beneficiario" name="beneficiario" formControlName="beneficiario">
+            <option [ngValue]="null"></option>
+            <option
+              [ngValue]="
+                beneficiarioOption.id === editForm.get('beneficiario')!.value?.id ? editForm.get('beneficiario')!.value : beneficiarioOption
+              "
+              *ngFor="let beneficiarioOption of beneficiariosCollection; trackBy: trackBeneficiarioById"
+            >
+              {{ beneficiarioOption.id }}
+            </option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="imasfsaudeApp.conta.conveniado" for="field_conveniado">Conveniado</label>
+          <select class="form-control" id="field_conveniado" data-cy="conveniado" name="conveniado" formControlName="conveniado">
+            <option [ngValue]="null"></option>
+            <option
+              [ngValue]="
+                conveniadoOption.id === editForm.get('conveniado')!.value?.id ? editForm.get('conveniado')!.value : conveniadoOption
+              "
+              *ngFor="let conveniadoOption of conveniadosCollection; trackBy: trackConveniadoById"
+            >
+              {{ conveniadoOption.id }}
+            </option>
+          </select>
+        </div>
+      </div>
+
+      <div>
+        <button type="button" id="cancel-save" class="btn btn-secondary" (click)="previousState()">
+          <fa-icon icon="ban"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+        </button>
+
+        <button
+          type="submit"
+          id="save-entity"
+          data-cy="entityCreateSaveButton"
+          [disabled]="editForm.invalid || isSaving"
+          class="btn btn-primary"
+        >
+          <fa-icon icon="save"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

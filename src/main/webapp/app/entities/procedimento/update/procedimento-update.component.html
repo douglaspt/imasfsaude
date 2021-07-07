@@ -1,0 +1,92 @@
+<div class="row justify-content-center">
+  <div class="col-8">
+    <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+      <h2
+        id="jhi-procedimento-heading"
+        data-cy="ProcedimentoCreateUpdateHeading"
+        jhiTranslate="imasfsaudeApp.procedimento.home.createOrEditLabel"
+      >
+        Create or edit a Procedimento
+      </h2>
+
+      <div>
+        <jhi-alert-error></jhi-alert-error>
+
+        <div class="form-group" [hidden]="editForm.get('id')!.value == null">
+          <label class="form-control-label" jhiTranslate="imasfsaudeApp.procedimento.id" for="field_id">Id</label>
+          <input type="number" class="form-control" name="id" id="field_id" data-cy="id" formControlName="id" [readonly]="true" />
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="imasfsaudeApp.procedimento.descricao" for="field_descricao">Descricao</label>
+          <input type="text" class="form-control" name="descricao" id="field_descricao" data-cy="descricao" formControlName="descricao" />
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="imasfsaudeApp.procedimento.quantidade" for="field_quantidade">Quantidade</label>
+          <input
+            type="number"
+            class="form-control"
+            name="quantidade"
+            id="field_quantidade"
+            data-cy="quantidade"
+            formControlName="quantidade"
+          />
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="imasfsaudeApp.procedimento.valorInformado" for="field_valorInformado"
+            >Valor Informado</label
+          >
+          <input
+            type="number"
+            class="form-control"
+            name="valorInformado"
+            id="field_valorInformado"
+            data-cy="valorInformado"
+            formControlName="valorInformado"
+          />
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="imasfsaudeApp.procedimento.valorPago" for="field_valorPago">Valor Pago</label>
+          <input type="number" class="form-control" name="valorPago" id="field_valorPago" data-cy="valorPago" formControlName="valorPago" />
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="imasfsaudeApp.procedimento.glosa" for="field_glosa">Glosa</label>
+          <input type="number" class="form-control" name="glosa" id="field_glosa" data-cy="glosa" formControlName="glosa" />
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="imasfsaudeApp.procedimento.conta" for="field_conta">Conta</label>
+          <select class="form-control" id="field_conta" data-cy="conta" name="conta" formControlName="conta">
+            <option [ngValue]="null"></option>
+            <option
+              [ngValue]="contaOption.id === editForm.get('conta')!.value?.id ? editForm.get('conta')!.value : contaOption"
+              *ngFor="let contaOption of contasSharedCollection; trackBy: trackContaById"
+            >
+              {{ contaOption.id }}
+            </option>
+          </select>
+        </div>
+      </div>
+
+      <div>
+        <button type="button" id="cancel-save" class="btn btn-secondary" (click)="previousState()">
+          <fa-icon icon="ban"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+        </button>
+
+        <button
+          type="submit"
+          id="save-entity"
+          data-cy="entityCreateSaveButton"
+          [disabled]="editForm.invalid || isSaving"
+          class="btn btn-primary"
+        >
+          <fa-icon icon="save"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

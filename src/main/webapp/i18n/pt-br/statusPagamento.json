@@ -1,0 +1,10 @@
+{
+  "imasfsaudeApp": {
+    "StatusPagamento": {
+      "null": "",
+      "PENDENTE": "PENDENTE",
+      "PAGO": "PAGO",
+      "CANCELADO": "CANCELADO"
+    }
+  }
+}

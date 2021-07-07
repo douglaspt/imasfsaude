@@ -1,0 +1,47 @@
+{
+  "name": "Procedimento",
+  "fields": [
+    {
+      "fieldName": "id",
+      "fieldType": "Long"
+    },
+    {
+      "fieldName": "descricao",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "quantidade",
+      "fieldType": "Integer"
+    },
+    {
+      "fieldName": "valorInformado",
+      "fieldType": "BigDecimal"
+    },
+    {
+      "fieldName": "valorPago",
+      "fieldType": "BigDecimal"
+    },
+    {
+      "fieldName": "glosa",
+      "fieldType": "BigDecimal"
+    }
+  ],
+  "relationships": [
+    {
+      "relationshipType": "many-to-one",
+      "otherEntityName": "conta",
+      "otherEntityRelationshipName": "procedimento",
+      "relationshipName": "conta"
+    }
+  ],
+  "entityTableName": "procedimento",
+  "dto": "no",
+  "pagination": "no",
+  "service": "serviceImpl",
+  "jpaMetamodelFiltering": false,
+  "fluentMethods": true,
+  "readOnly": false,
+  "embedded": false,
+  "applications": "*",
+  "changelogDate": "20210707193432"
+}

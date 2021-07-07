@@ -1,0 +1,128 @@
+<div>
+  <h2 id="page-heading" data-cy="ConveniadoHeading">
+    <span jhiTranslate="imasfsaudeApp.conveniado.home.title">Conveniados</span>
+
+    <div class="d-flex justify-content-end">
+      <button class="btn btn-info mr-2" (click)="loadPage()" [disabled]="isLoading">
+        <fa-icon icon="sync" [spin]="isLoading"></fa-icon>
+        <span jhiTranslate="imasfsaudeApp.conveniado.home.refreshListLabel">Refresh List</span>
+      </button>
+
+      <button
+        id="jh-create-entity"
+        data-cy="entityCreateButton"
+        class="btn btn-primary jh-create-entity create-conveniado"
+        [routerLink]="['/conveniado/new']"
+      >
+        <fa-icon icon="plus"></fa-icon>
+        <span jhiTranslate="imasfsaudeApp.conveniado.home.createLabel"> Create a new Conveniado </span>
+      </button>
+    </div>
+  </h2>
+
+  <jhi-alert-error></jhi-alert-error>
+
+  <jhi-alert></jhi-alert>
+
+  <div class="alert alert-warning" id="no-result" *ngIf="conveniados?.length === 0">
+    <span jhiTranslate="imasfsaudeApp.conveniado.home.notFound">No conveniados found</span>
+  </div>
+
+  <div class="table-responsive" id="entities" *ngIf="conveniados && conveniados.length > 0">
+    <table class="table table-striped" aria-describedby="page-heading">
+      <thead>
+        <tr jhiSort [(predicate)]="predicate" [(ascending)]="ascending" [callback]="loadPage.bind(this)">
+          <th scope="col" jhiSortBy="id"><span jhiTranslate="imasfsaudeApp.conveniado.id">Id</span> <fa-icon icon="sort"></fa-icon></th>
+          <th scope="col" jhiSortBy="nome">
+            <span jhiTranslate="imasfsaudeApp.conveniado.nome">Nome</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="cnpj">
+            <span jhiTranslate="imasfsaudeApp.conveniado.cnpj">Cnpj</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="contrato">
+            <span jhiTranslate="imasfsaudeApp.conveniado.contrato">Contrato</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="rg"><span jhiTranslate="imasfsaudeApp.conveniado.rg">Rg</span> <fa-icon icon="sort"></fa-icon></th>
+          <th scope="col" jhiSortBy="email">
+            <span jhiTranslate="imasfsaudeApp.conveniado.email">Email</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="telefone">
+            <span jhiTranslate="imasfsaudeApp.conveniado.telefone">Telefone</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="status">
+            <span jhiTranslate="imasfsaudeApp.conveniado.status">Status</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="cep.id">
+            <span jhiTranslate="imasfsaudeApp.conveniado.cep">Cep</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col"></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let conveniado of conveniados; trackBy: trackId" data-cy="entityTable">
+          <td>
+            <a [routerLink]="['/conveniado', conveniado.id, 'view']">{{ conveniado.id }}</a>
+          </td>
+          <td>{{ conveniado.nome }}</td>
+          <td>{{ conveniado.cnpj }}</td>
+          <td>{{ conveniado.contrato }}</td>
+          <td>{{ conveniado.rg }}</td>
+          <td>{{ conveniado.email }}</td>
+          <td>{{ conveniado.telefone }}</td>
+          <td jhiTranslate="{{ 'imasfsaudeApp.Status.' + conveniado.status }}">{{ conveniado.status }}</td>
+          <td>
+            <div *ngIf="conveniado.cep">
+              <a [routerLink]="['/cep', conveniado.cep?.id, 'view']">{{ conveniado.cep?.id }}</a>
+            </div>
+          </td>
+          <td class="text-right">
+            <div class="btn-group">
+              <button
+                type="submit"
+                [routerLink]="['/conveniado', conveniado.id, 'view']"
+                class="btn btn-info btn-sm"
+                data-cy="entityDetailsButton"
+              >
+                <fa-icon icon="eye"></fa-icon>
+                <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
+              </button>
+
+              <button
+                type="submit"
+                [routerLink]="['/conveniado', conveniado.id, 'edit']"
+                class="btn btn-primary btn-sm"
+                data-cy="entityEditButton"
+              >
+                <fa-icon icon="pencil-alt"></fa-icon>
+                <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
+              </button>
+
+              <button type="submit" (click)="delete(conveniado)" class="btn btn-danger btn-sm" data-cy="entityDeleteButton">
+                <fa-icon icon="times"></fa-icon>
+                <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
+              </button>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div *ngIf="conveniados && conveniados.length > 0">
+    <div class="row justify-content-center">
+      <jhi-item-count [params]="{ page: page, totalItems: totalItems, itemsPerPage: itemsPerPage }"></jhi-item-count>
+    </div>
+
+    <div class="row justify-content-center">
+      <ngb-pagination
+        [collectionSize]="totalItems"
+        [(page)]="ngbPaginationPage"
+        [pageSize]="itemsPerPage"
+        [maxSize]="5"
+        [rotate]="true"
+        [boundaryLinks]="true"
+        (pageChange)="loadPage($event)"
+      ></ngb-pagination>
+    </div>
+  </div>
+</div>

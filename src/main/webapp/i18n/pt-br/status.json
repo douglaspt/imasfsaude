@@ -1,0 +1,10 @@
+{
+  "imasfsaudeApp": {
+    "Status": {
+      "null": "",
+      "ATIVO": "ATIVO",
+      "INATIVO": "INATIVO",
+      "SUSPENSO": "SUSPENSO"
+    }
+  }
+}

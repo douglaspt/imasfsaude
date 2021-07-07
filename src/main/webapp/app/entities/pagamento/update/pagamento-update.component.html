@@ -1,0 +1,140 @@
+<div class="row justify-content-center">
+  <div class="col-8">
+    <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+      <h2 id="jhi-pagamento-heading" data-cy="PagamentoCreateUpdateHeading" jhiTranslate="imasfsaudeApp.pagamento.home.createOrEditLabel">
+        Create or edit a Pagamento
+      </h2>
+
+      <div>
+        <jhi-alert-error></jhi-alert-error>
+
+        <div class="form-group" [hidden]="editForm.get('id')!.value == null">
+          <label class="form-control-label" jhiTranslate="imasfsaudeApp.pagamento.id" for="field_id">Id</label>
+          <input type="number" class="form-control" name="id" id="field_id" data-cy="id" formControlName="id" [readonly]="true" />
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="imasfsaudeApp.pagamento.descricao" for="field_descricao">Descricao</label>
+          <input type="text" class="form-control" name="descricao" id="field_descricao" data-cy="descricao" formControlName="descricao" />
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="imasfsaudeApp.pagamento.emissao" for="field_emissao">Emissao</label>
+          <div class="input-group">
+            <input
+              id="field_emissao"
+              data-cy="emissao"
+              type="text"
+              class="form-control"
+              name="emissao"
+              ngbDatepicker
+              #emissaoDp="ngbDatepicker"
+              formControlName="emissao"
+            />
+            <span class="input-group-append">
+              <button type="button" class="btn btn-secondary" (click)="emissaoDp.toggle()"><fa-icon icon="calendar-alt"></fa-icon></button>
+            </span>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="imasfsaudeApp.pagamento.vencimento" for="field_vencimento">Vencimento</label>
+          <div class="input-group">
+            <input
+              id="field_vencimento"
+              data-cy="vencimento"
+              type="text"
+              class="form-control"
+              name="vencimento"
+              ngbDatepicker
+              #vencimentoDp="ngbDatepicker"
+              formControlName="vencimento"
+            />
+            <span class="input-group-append">
+              <button type="button" class="btn btn-secondary" (click)="vencimentoDp.toggle()">
+                <fa-icon icon="calendar-alt"></fa-icon>
+              </button>
+            </span>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="imasfsaudeApp.pagamento.valor" for="field_valor">Valor</label>
+          <input type="number" class="form-control" name="valor" id="field_valor" data-cy="valor" formControlName="valor" />
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="imasfsaudeApp.pagamento.valorDesconto" for="field_valorDesconto"
+            >Valor Desconto</label
+          >
+          <input
+            type="number"
+            class="form-control"
+            name="valorDesconto"
+            id="field_valorDesconto"
+            data-cy="valorDesconto"
+            formControlName="valorDesconto"
+          />
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="imasfsaudeApp.pagamento.valorAcrescimo" for="field_valorAcrescimo"
+            >Valor Acrescimo</label
+          >
+          <input
+            type="number"
+            class="form-control"
+            name="valorAcrescimo"
+            id="field_valorAcrescimo"
+            data-cy="valorAcrescimo"
+            formControlName="valorAcrescimo"
+          />
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="imasfsaudeApp.pagamento.valorPago" for="field_valorPago">Valor Pago</label>
+          <input type="number" class="form-control" name="valorPago" id="field_valorPago" data-cy="valorPago" formControlName="valorPago" />
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="imasfsaudeApp.pagamento.status" for="field_status">Status</label>
+          <select class="form-control" name="status" formControlName="status" id="field_status" data-cy="status">
+            <option [ngValue]="null">{{ 'imasfsaudeApp.StatusPagamento.null' | translate }}</option>
+            <option value="PENDENTE">{{ 'imasfsaudeApp.StatusPagamento.PENDENTE' | translate }}</option>
+            <option value="PAGO">{{ 'imasfsaudeApp.StatusPagamento.PAGO' | translate }}</option>
+            <option value="CANCELADO">{{ 'imasfsaudeApp.StatusPagamento.CANCELADO' | translate }}</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="imasfsaudeApp.pagamento.conta" for="field_conta">Conta</label>
+          <select class="form-control" id="field_conta" data-cy="conta" name="conta" formControlName="conta">
+            <option [ngValue]="null"></option>
+            <option
+              [ngValue]="contaOption.id === editForm.get('conta')!.value?.id ? editForm.get('conta')!.value : contaOption"
+              *ngFor="let contaOption of contasCollection; trackBy: trackContaById"
+            >
+              {{ contaOption.id }}
+            </option>
+          </select>
+        </div>
+      </div>
+
+      <div>
+        <button type="button" id="cancel-save" class="btn btn-secondary" (click)="previousState()">
+          <fa-icon icon="ban"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+        </button>
+
+        <button
+          type="submit"
+          id="save-entity"
+          data-cy="entityCreateSaveButton"
+          [disabled]="editForm.invalid || isSaving"
+          class="btn btn-primary"
+        >
+          <fa-icon icon="save"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

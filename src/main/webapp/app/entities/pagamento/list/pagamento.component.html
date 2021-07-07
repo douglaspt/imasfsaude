@@ -1,0 +1,116 @@
+<div>
+  <h2 id="page-heading" data-cy="PagamentoHeading">
+    <span jhiTranslate="imasfsaudeApp.pagamento.home.title">Pagamentos</span>
+
+    <div class="d-flex justify-content-end">
+      <button class="btn btn-info mr-2" (click)="reset()" [disabled]="isLoading">
+        <fa-icon icon="sync" [spin]="isLoading"></fa-icon>
+        <span jhiTranslate="imasfsaudeApp.pagamento.home.refreshListLabel">Refresh List</span>
+      </button>
+
+      <button
+        id="jh-create-entity"
+        data-cy="entityCreateButton"
+        class="btn btn-primary jh-create-entity create-pagamento"
+        [routerLink]="['/pagamento/new']"
+      >
+        <fa-icon icon="plus"></fa-icon>
+        <span jhiTranslate="imasfsaudeApp.pagamento.home.createLabel"> Create a new Pagamento </span>
+      </button>
+    </div>
+  </h2>
+
+  <jhi-alert-error></jhi-alert-error>
+
+  <jhi-alert></jhi-alert>
+
+  <div class="alert alert-warning" id="no-result" *ngIf="pagamentos?.length === 0">
+    <span jhiTranslate="imasfsaudeApp.pagamento.home.notFound">No pagamentos found</span>
+  </div>
+
+  <div class="table-responsive" id="entities" *ngIf="pagamentos && pagamentos.length > 0">
+    <table class="table table-striped" aria-describedby="page-heading">
+      <thead>
+        <tr jhiSort [(predicate)]="predicate" [(ascending)]="ascending" [callback]="reset.bind(this)">
+          <th scope="col" jhiSortBy="id"><span jhiTranslate="imasfsaudeApp.pagamento.id">Id</span> <fa-icon icon="sort"></fa-icon></th>
+          <th scope="col" jhiSortBy="descricao">
+            <span jhiTranslate="imasfsaudeApp.pagamento.descricao">Descricao</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="emissao">
+            <span jhiTranslate="imasfsaudeApp.pagamento.emissao">Emissao</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="vencimento">
+            <span jhiTranslate="imasfsaudeApp.pagamento.vencimento">Vencimento</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="valor">
+            <span jhiTranslate="imasfsaudeApp.pagamento.valor">Valor</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="valorDesconto">
+            <span jhiTranslate="imasfsaudeApp.pagamento.valorDesconto">Valor Desconto</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="valorAcrescimo">
+            <span jhiTranslate="imasfsaudeApp.pagamento.valorAcrescimo">Valor Acrescimo</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="valorPago">
+            <span jhiTranslate="imasfsaudeApp.pagamento.valorPago">Valor Pago</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="status">
+            <span jhiTranslate="imasfsaudeApp.pagamento.status">Status</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="conta.id">
+            <span jhiTranslate="imasfsaudeApp.pagamento.conta">Conta</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col"></th>
+        </tr>
+      </thead>
+      <tbody infinite-scroll (scrolled)="loadPage(page + 1)" [infiniteScrollDisabled]="page >= links['last']" [infiniteScrollDistance]="0">
+        <tr *ngFor="let pagamento of pagamentos; trackBy: trackId" data-cy="entityTable">
+          <td>
+            <a [routerLink]="['/pagamento', pagamento.id, 'view']">{{ pagamento.id }}</a>
+          </td>
+          <td>{{ pagamento.descricao }}</td>
+          <td>{{ pagamento.emissao | formatMediumDate }}</td>
+          <td>{{ pagamento.vencimento | formatMediumDate }}</td>
+          <td>{{ pagamento.valor }}</td>
+          <td>{{ pagamento.valorDesconto }}</td>
+          <td>{{ pagamento.valorAcrescimo }}</td>
+          <td>{{ pagamento.valorPago }}</td>
+          <td jhiTranslate="{{ 'imasfsaudeApp.StatusPagamento.' + pagamento.status }}">{{ pagamento.status }}</td>
+          <td>
+            <div *ngIf="pagamento.conta">
+              <a [routerLink]="['/conta', pagamento.conta?.id, 'view']">{{ pagamento.conta?.id }}</a>
+            </div>
+          </td>
+          <td class="text-right">
+            <div class="btn-group">
+              <button
+                type="submit"
+                [routerLink]="['/pagamento', pagamento.id, 'view']"
+                class="btn btn-info btn-sm"
+                data-cy="entityDetailsButton"
+              >
+                <fa-icon icon="eye"></fa-icon>
+                <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
+              </button>
+
+              <button
+                type="submit"
+                [routerLink]="['/pagamento', pagamento.id, 'edit']"
+                class="btn btn-primary btn-sm"
+                data-cy="entityEditButton"
+              >
+                <fa-icon icon="pencil-alt"></fa-icon>
+                <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
+              </button>
+
+              <button type="submit" (click)="delete(pagamento)" class="btn btn-danger btn-sm" data-cy="entityDeleteButton">
+                <fa-icon icon="times"></fa-icon>
+                <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
+              </button>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

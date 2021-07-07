@@ -48,6 +48,14 @@ public class CacheConfiguration {
             createCache(cm, br.com.imasf.domain.User.class.getName());
             createCache(cm, br.com.imasf.domain.Authority.class.getName());
             createCache(cm, br.com.imasf.domain.User.class.getName() + ".authorities");
+            createCache(cm, br.com.imasf.domain.Conta.class.getName());
+            createCache(cm, br.com.imasf.domain.Conta.class.getName() + ".procedimentos");
+            createCache(cm, br.com.imasf.domain.Pagamento.class.getName());
+            createCache(cm, br.com.imasf.domain.Procedimento.class.getName());
+            createCache(cm, br.com.imasf.domain.Plano.class.getName());
+            createCache(cm, br.com.imasf.domain.Cep.class.getName());
+            createCache(cm, br.com.imasf.domain.Beneficiario.class.getName());
+            createCache(cm, br.com.imasf.domain.Conveniado.class.getName());
             // jhipster-needle-ehcache-add-entry
         };
     }

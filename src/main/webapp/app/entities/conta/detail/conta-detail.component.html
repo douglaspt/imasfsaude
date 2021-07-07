@@ -1,0 +1,48 @@
+<div class="row justify-content-center">
+  <div class="col-8">
+    <div *ngIf="conta">
+      <h2 data-cy="contaDetailsHeading"><span jhiTranslate="imasfsaudeApp.conta.detail.title">Conta</span></h2>
+
+      <hr />
+
+      <jhi-alert-error></jhi-alert-error>
+
+      <jhi-alert></jhi-alert>
+
+      <dl class="row-md jh-entity-details">
+        <dt><span jhiTranslate="imasfsaudeApp.conta.id">Id</span></dt>
+        <dd>
+          <span>{{ conta.id }}</span>
+        </dd>
+        <dt><span jhiTranslate="imasfsaudeApp.conta.competencia">Competencia</span></dt>
+        <dd>
+          <span>{{ conta.competencia | formatMediumDate }}</span>
+        </dd>
+        <dt><span jhiTranslate="imasfsaudeApp.conta.status">Status</span></dt>
+        <dd>
+          <span jhiTranslate="{{ 'imasfsaudeApp.StatusPagamento.' + conta.status }}">{{ conta.status }}</span>
+        </dd>
+        <dt><span jhiTranslate="imasfsaudeApp.conta.beneficiario">Beneficiario</span></dt>
+        <dd>
+          <div *ngIf="conta.beneficiario">
+            <a [routerLink]="['/beneficiario', conta.beneficiario?.id, 'view']">{{ conta.beneficiario?.id }}</a>
+          </div>
+        </dd>
+        <dt><span jhiTranslate="imasfsaudeApp.conta.conveniado">Conveniado</span></dt>
+        <dd>
+          <div *ngIf="conta.conveniado">
+            <a [routerLink]="['/conveniado', conta.conveniado?.id, 'view']">{{ conta.conveniado?.id }}</a>
+          </div>
+        </dd>
+      </dl>
+
+      <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+      </button>
+
+      <button type="button" [routerLink]="['/conta', conta.id, 'edit']" class="btn btn-primary">
+        <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+      </button>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,61 @@
+{
+  "name": "Pagamento",
+  "fields": [
+    {
+      "fieldName": "id",
+      "fieldType": "Long"
+    },
+    {
+      "fieldName": "descricao",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "emissao",
+      "fieldType": "LocalDate"
+    },
+    {
+      "fieldName": "vencimento",
+      "fieldType": "LocalDate"
+    },
+    {
+      "fieldName": "valor",
+      "fieldType": "BigDecimal"
+    },
+    {
+      "fieldName": "valorDesconto",
+      "fieldType": "BigDecimal"
+    },
+    {
+      "fieldName": "valorAcrescimo",
+      "fieldType": "BigDecimal"
+    },
+    {
+      "fieldName": "valorPago",
+      "fieldType": "BigDecimal"
+    },
+    {
+      "fieldName": "status",
+      "fieldType": "StatusPagamento",
+      "fieldValues": "PENDENTE,PAGO,CANCELADO"
+    }
+  ],
+  "relationships": [
+    {
+      "relationshipType": "one-to-one",
+      "otherEntityName": "conta",
+      "otherEntityRelationshipName": "pagamento",
+      "relationshipName": "conta",
+      "ownerSide": true
+    }
+  ],
+  "entityTableName": "pagamento",
+  "dto": "no",
+  "pagination": "infinite-scroll",
+  "service": "serviceImpl",
+  "jpaMetamodelFiltering": false,
+  "fluentMethods": true,
+  "readOnly": false,
+  "embedded": false,
+  "applications": "*",
+  "changelogDate": "20210707193431"
+}

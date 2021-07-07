@@ -1,0 +1,108 @@
+<div>
+  <h2 id="page-heading" data-cy="ContaHeading">
+    <span jhiTranslate="imasfsaudeApp.conta.home.title">Contas</span>
+
+    <div class="d-flex justify-content-end">
+      <button class="btn btn-info mr-2" (click)="loadPage()" [disabled]="isLoading">
+        <fa-icon icon="sync" [spin]="isLoading"></fa-icon>
+        <span jhiTranslate="imasfsaudeApp.conta.home.refreshListLabel">Refresh List</span>
+      </button>
+
+      <button
+        id="jh-create-entity"
+        data-cy="entityCreateButton"
+        class="btn btn-primary jh-create-entity create-conta"
+        [routerLink]="['/conta/new']"
+      >
+        <fa-icon icon="plus"></fa-icon>
+        <span jhiTranslate="imasfsaudeApp.conta.home.createLabel"> Create a new Conta </span>
+      </button>
+    </div>
+  </h2>
+
+  <jhi-alert-error></jhi-alert-error>
+
+  <jhi-alert></jhi-alert>
+
+  <div class="alert alert-warning" id="no-result" *ngIf="contas?.length === 0">
+    <span jhiTranslate="imasfsaudeApp.conta.home.notFound">No contas found</span>
+  </div>
+
+  <div class="table-responsive" id="entities" *ngIf="contas && contas.length > 0">
+    <table class="table table-striped" aria-describedby="page-heading">
+      <thead>
+        <tr jhiSort [(predicate)]="predicate" [(ascending)]="ascending" [callback]="loadPage.bind(this)">
+          <th scope="col" jhiSortBy="id"><span jhiTranslate="imasfsaudeApp.conta.id">Id</span> <fa-icon icon="sort"></fa-icon></th>
+          <th scope="col" jhiSortBy="competencia">
+            <span jhiTranslate="imasfsaudeApp.conta.competencia">Competencia</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="status">
+            <span jhiTranslate="imasfsaudeApp.conta.status">Status</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="beneficiario.id">
+            <span jhiTranslate="imasfsaudeApp.conta.beneficiario">Beneficiario</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="conveniado.id">
+            <span jhiTranslate="imasfsaudeApp.conta.conveniado">Conveniado</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col"></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let conta of contas; trackBy: trackId" data-cy="entityTable">
+          <td>
+            <a [routerLink]="['/conta', conta.id, 'view']">{{ conta.id }}</a>
+          </td>
+          <td>{{ conta.competencia | formatMediumDate }}</td>
+          <td jhiTranslate="{{ 'imasfsaudeApp.StatusPagamento.' + conta.status }}">{{ conta.status }}</td>
+          <td>
+            <div *ngIf="conta.beneficiario">
+              <a [routerLink]="['/beneficiario', conta.beneficiario?.id, 'view']">{{ conta.beneficiario?.id }}</a>
+            </div>
+          </td>
+          <td>
+            <div *ngIf="conta.conveniado">
+              <a [routerLink]="['/conveniado', conta.conveniado?.id, 'view']">{{ conta.conveniado?.id }}</a>
+            </div>
+          </td>
+          <td class="text-right">
+            <div class="btn-group">
+              <button type="submit" [routerLink]="['/conta', conta.id, 'view']" class="btn btn-info btn-sm" data-cy="entityDetailsButton">
+                <fa-icon icon="eye"></fa-icon>
+                <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
+              </button>
+
+              <button type="submit" [routerLink]="['/conta', conta.id, 'edit']" class="btn btn-primary btn-sm" data-cy="entityEditButton">
+                <fa-icon icon="pencil-alt"></fa-icon>
+                <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
+              </button>
+
+              <button type="submit" (click)="delete(conta)" class="btn btn-danger btn-sm" data-cy="entityDeleteButton">
+                <fa-icon icon="times"></fa-icon>
+                <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
+              </button>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div *ngIf="contas && contas.length > 0">
+    <div class="row justify-content-center">
+      <jhi-item-count [params]="{ page: page, totalItems: totalItems, itemsPerPage: itemsPerPage }"></jhi-item-count>
+    </div>
+
+    <div class="row justify-content-center">
+      <ngb-pagination
+        [collectionSize]="totalItems"
+        [(page)]="ngbPaginationPage"
+        [pageSize]="itemsPerPage"
+        [maxSize]="5"
+        [rotate]="true"
+        [boundaryLinks]="true"
+        (pageChange)="loadPage($event)"
+      ></ngb-pagination>
+    </div>
+  </div>
+</div>

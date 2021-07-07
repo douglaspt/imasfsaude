@@ -1,0 +1,31 @@
+{
+  "imasfsaudeApp": {
+    "conveniado": {
+      "home": {
+        "title": "Conveniados",
+        "refreshListLabel": "Atualizar lista",
+        "createLabel": "Criar novo Conveniado",
+        "createOrEditLabel": "Criar ou editar Conveniado",
+        "notFound": "Nenhum Conveniado encontrado"
+      },
+      "created": "Um novo Conveniado foi criado com o identificador {{ param }}",
+      "updated": "Um Conveniado foi atualizado com o identificador {{ param }}",
+      "deleted": "Um Conveniado foi excluído com o identificador {{ param }}",
+      "delete": {
+        "question": "Tem certeza de que deseja excluir Conveniado {{ id }}?"
+      },
+      "detail": {
+        "title": "Conveniado"
+      },
+      "id": "Id",
+      "nome": "Nome",
+      "cnpj": "Cnpj",
+      "contrato": "Contrato",
+      "rg": "Rg",
+      "email": "Email",
+      "telefone": "Telefone",
+      "status": "Status",
+      "cep": "Cep"
+    }
+  }
+}

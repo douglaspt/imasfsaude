@@ -1,0 +1,74 @@
+<div>
+  <h2 id="page-heading" data-cy="CepHeading">
+    <span jhiTranslate="imasfsaudeApp.cep.home.title">Ceps</span>
+
+    <div class="d-flex justify-content-end">
+      <button class="btn btn-info mr-2" (click)="loadAll()" [disabled]="isLoading">
+        <fa-icon icon="sync" [spin]="isLoading"></fa-icon>
+        <span jhiTranslate="imasfsaudeApp.cep.home.refreshListLabel">Refresh List</span>
+      </button>
+
+      <button
+        id="jh-create-entity"
+        data-cy="entityCreateButton"
+        class="btn btn-primary jh-create-entity create-cep"
+        [routerLink]="['/cep/new']"
+      >
+        <fa-icon icon="plus"></fa-icon>
+        <span jhiTranslate="imasfsaudeApp.cep.home.createLabel"> Create a new Cep </span>
+      </button>
+    </div>
+  </h2>
+
+  <jhi-alert-error></jhi-alert-error>
+
+  <jhi-alert></jhi-alert>
+
+  <div class="alert alert-warning" id="no-result" *ngIf="ceps?.length === 0">
+    <span jhiTranslate="imasfsaudeApp.cep.home.notFound">No ceps found</span>
+  </div>
+
+  <div class="table-responsive" id="entities" *ngIf="ceps && ceps.length > 0">
+    <table class="table table-striped" aria-describedby="page-heading">
+      <thead>
+        <tr>
+          <th scope="col"><span jhiTranslate="imasfsaudeApp.cep.id">Id</span></th>
+          <th scope="col"><span jhiTranslate="imasfsaudeApp.cep.logradouro">Logradouro</span></th>
+          <th scope="col"><span jhiTranslate="imasfsaudeApp.cep.bairro">Bairro</span></th>
+          <th scope="col"><span jhiTranslate="imasfsaudeApp.cep.cidade">Cidade</span></th>
+          <th scope="col"><span jhiTranslate="imasfsaudeApp.cep.uF">U F</span></th>
+          <th scope="col"></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let cep of ceps; trackBy: trackId" data-cy="entityTable">
+          <td>
+            <a [routerLink]="['/cep', cep.id, 'view']">{{ cep.id }}</a>
+          </td>
+          <td>{{ cep.logradouro }}</td>
+          <td>{{ cep.bairro }}</td>
+          <td>{{ cep.cidade }}</td>
+          <td>{{ cep.uF }}</td>
+          <td class="text-right">
+            <div class="btn-group">
+              <button type="submit" [routerLink]="['/cep', cep.id, 'view']" class="btn btn-info btn-sm" data-cy="entityDetailsButton">
+                <fa-icon icon="eye"></fa-icon>
+                <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
+              </button>
+
+              <button type="submit" [routerLink]="['/cep', cep.id, 'edit']" class="btn btn-primary btn-sm" data-cy="entityEditButton">
+                <fa-icon icon="pencil-alt"></fa-icon>
+                <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
+              </button>
+
+              <button type="submit" (click)="delete(cep)" class="btn btn-danger btn-sm" data-cy="entityDeleteButton">
+                <fa-icon icon="times"></fa-icon>
+                <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
+              </button>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

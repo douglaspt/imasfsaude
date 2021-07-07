@@ -1,0 +1,44 @@
+<div class="row justify-content-center">
+  <div class="col-8">
+    <div *ngIf="cep">
+      <h2 data-cy="cepDetailsHeading"><span jhiTranslate="imasfsaudeApp.cep.detail.title">Cep</span></h2>
+
+      <hr />
+
+      <jhi-alert-error></jhi-alert-error>
+
+      <jhi-alert></jhi-alert>
+
+      <dl class="row-md jh-entity-details">
+        <dt><span jhiTranslate="imasfsaudeApp.cep.id">Id</span></dt>
+        <dd>
+          <span>{{ cep.id }}</span>
+        </dd>
+        <dt><span jhiTranslate="imasfsaudeApp.cep.logradouro">Logradouro</span></dt>
+        <dd>
+          <span>{{ cep.logradouro }}</span>
+        </dd>
+        <dt><span jhiTranslate="imasfsaudeApp.cep.bairro">Bairro</span></dt>
+        <dd>
+          <span>{{ cep.bairro }}</span>
+        </dd>
+        <dt><span jhiTranslate="imasfsaudeApp.cep.cidade">Cidade</span></dt>
+        <dd>
+          <span>{{ cep.cidade }}</span>
+        </dd>
+        <dt><span jhiTranslate="imasfsaudeApp.cep.uF">U F</span></dt>
+        <dd>
+          <span>{{ cep.uF }}</span>
+        </dd>
+      </dl>
+
+      <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+      </button>
+
+      <button type="button" [routerLink]="['/cep', cep.id, 'edit']" class="btn btn-primary">
+        <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+      </button>
+    </div>
+  </div>
+</div>

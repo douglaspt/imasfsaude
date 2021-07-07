@@ -1,0 +1,27 @@
+{
+  "imasfsaudeApp": {
+    "cep": {
+      "home": {
+        "title": "Ceps",
+        "refreshListLabel": "Atualizar lista",
+        "createLabel": "Criar novo Cep",
+        "createOrEditLabel": "Criar ou editar Cep",
+        "notFound": "Nenhum Cep encontrado"
+      },
+      "created": "Um novo Cep foi criado com o identificador {{ param }}",
+      "updated": "Um Cep foi atualizado com o identificador {{ param }}",
+      "deleted": "Um Cep foi excluído com o identificador {{ param }}",
+      "delete": {
+        "question": "Tem certeza de que deseja excluir Cep {{ id }}?"
+      },
+      "detail": {
+        "title": "Cep"
+      },
+      "id": "Id",
+      "logradouro": "Logradouro",
+      "bairro": "Bairro",
+      "cidade": "Cidade",
+      "uF": "U F"
+    }
+  }
+}

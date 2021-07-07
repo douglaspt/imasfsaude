@@ -1,0 +1,27 @@
+{
+  "imasfsaudeApp": {
+    "cep": {
+      "home": {
+        "title": "Ceps",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Create a new Cep",
+        "createOrEditLabel": "Create or edit a Cep",
+        "notFound": "No Ceps found"
+      },
+      "created": "A new Cep is created with identifier {{ param }}",
+      "updated": "A Cep is updated with identifier {{ param }}",
+      "deleted": "A Cep is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete Cep {{ id }}?"
+      },
+      "detail": {
+        "title": "Cep"
+      },
+      "id": "Id",
+      "logradouro": "Logradouro",
+      "bairro": "Bairro",
+      "cidade": "Cidade",
+      "uF": "U F"
+    }
+  }
+}

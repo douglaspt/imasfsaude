@@ -1,0 +1,29 @@
+{
+  "imasfsaudeApp": {
+    "procedimento": {
+      "home": {
+        "title": "Procedimentos",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Create a new Procedimento",
+        "createOrEditLabel": "Create or edit a Procedimento",
+        "notFound": "No Procedimentos found"
+      },
+      "created": "A new Procedimento is created with identifier {{ param }}",
+      "updated": "A Procedimento is updated with identifier {{ param }}",
+      "deleted": "A Procedimento is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete Procedimento {{ id }}?"
+      },
+      "detail": {
+        "title": "Procedimento"
+      },
+      "id": "Id",
+      "descricao": "Descricao",
+      "quantidade": "Quantidade",
+      "valorInformado": "Valor Informado",
+      "valorPago": "Valor Pago",
+      "glosa": "Glosa",
+      "conta": "Conta"
+    }
+  }
+}

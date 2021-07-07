@@ -1,0 +1,36 @@
+<div class="row justify-content-center">
+  <div class="col-8">
+    <div *ngIf="plano">
+      <h2 data-cy="planoDetailsHeading"><span jhiTranslate="imasfsaudeApp.plano.detail.title">Plano</span></h2>
+
+      <hr />
+
+      <jhi-alert-error></jhi-alert-error>
+
+      <jhi-alert></jhi-alert>
+
+      <dl class="row-md jh-entity-details">
+        <dt><span jhiTranslate="imasfsaudeApp.plano.id">Id</span></dt>
+        <dd>
+          <span>{{ plano.id }}</span>
+        </dd>
+        <dt><span jhiTranslate="imasfsaudeApp.plano.nome">Nome</span></dt>
+        <dd>
+          <span>{{ plano.nome }}</span>
+        </dd>
+        <dt><span jhiTranslate="imasfsaudeApp.plano.valor">Valor</span></dt>
+        <dd>
+          <span>{{ plano.valor }}</span>
+        </dd>
+      </dl>
+
+      <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+      </button>
+
+      <button type="button" [routerLink]="['/plano', plano.id, 'edit']" class="btn btn-primary">
+        <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+      </button>
+    </div>
+  </div>
+</div>

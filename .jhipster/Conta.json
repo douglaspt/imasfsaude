@@ -1,0 +1,50 @@
+{
+  "name": "Conta",
+  "fields": [
+    {
+      "fieldName": "id",
+      "fieldType": "Long"
+    },
+    {
+      "fieldName": "competencia",
+      "fieldType": "LocalDate"
+    },
+    {
+      "fieldName": "status",
+      "fieldType": "StatusPagamento",
+      "fieldValues": "PENDENTE,PAGO,CANCELADO"
+    }
+  ],
+  "relationships": [
+    {
+      "relationshipType": "one-to-one",
+      "otherEntityName": "beneficiario",
+      "otherEntityRelationshipName": "conta",
+      "relationshipName": "beneficiario",
+      "ownerSide": true
+    },
+    {
+      "relationshipType": "one-to-one",
+      "otherEntityName": "conveniado",
+      "otherEntityRelationshipName": "conta",
+      "relationshipName": "conveniado",
+      "ownerSide": true
+    },
+    {
+      "relationshipType": "one-to-many",
+      "otherEntityName": "procedimento",
+      "otherEntityRelationshipName": "conta",
+      "relationshipName": "procedimento"
+    }
+  ],
+  "entityTableName": "conta",
+  "dto": "no",
+  "pagination": "pagination",
+  "service": "serviceImpl",
+  "jpaMetamodelFiltering": false,
+  "fluentMethods": true,
+  "readOnly": false,
+  "embedded": false,
+  "applications": "*",
+  "changelogDate": "20210707193430"
+}

@@ -41,6 +41,8 @@
     "packageFolder": "br/com/imasf",
     "jwtSecretKey": "OWQwYmQ3NzQ4NzNkNGM5MmVkMDg0N2MwZDM3YmFlN2RlOTI2ZDZlNTdmOGQyOWNkZTA5Y2I3YTEyNmM4NGQ0YWYyNTkyNjY0YjM2N2FjZjEwNDQyMzg1ZDZiNGVjYzU0YTliZWExMDM2NjgyNjczZWYxZTRjNjQwNDNiMTFkNTY=",
     "clientPackageManager": "npm",
-    "languages": ["pt-br", "en"]
+    "languages": ["pt-br", "en"],
+    "entities": ["Conta", "Pagamento", "Procedimento", "Plano", "Cep", "Beneficiario", "Conveniado"],
+    "lastLiquibaseTimestamp": 1625686476000
   }
 }

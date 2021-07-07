@@ -1,0 +1,66 @@
+<div class="row justify-content-center">
+  <div class="col-8">
+    <div *ngIf="pagamento">
+      <h2 data-cy="pagamentoDetailsHeading"><span jhiTranslate="imasfsaudeApp.pagamento.detail.title">Pagamento</span></h2>
+
+      <hr />
+
+      <jhi-alert-error></jhi-alert-error>
+
+      <jhi-alert></jhi-alert>
+
+      <dl class="row-md jh-entity-details">
+        <dt><span jhiTranslate="imasfsaudeApp.pagamento.id">Id</span></dt>
+        <dd>
+          <span>{{ pagamento.id }}</span>
+        </dd>
+        <dt><span jhiTranslate="imasfsaudeApp.pagamento.descricao">Descricao</span></dt>
+        <dd>
+          <span>{{ pagamento.descricao }}</span>
+        </dd>
+        <dt><span jhiTranslate="imasfsaudeApp.pagamento.emissao">Emissao</span></dt>
+        <dd>
+          <span>{{ pagamento.emissao | formatMediumDate }}</span>
+        </dd>
+        <dt><span jhiTranslate="imasfsaudeApp.pagamento.vencimento">Vencimento</span></dt>
+        <dd>
+          <span>{{ pagamento.vencimento | formatMediumDate }}</span>
+        </dd>
+        <dt><span jhiTranslate="imasfsaudeApp.pagamento.valor">Valor</span></dt>
+        <dd>
+          <span>{{ pagamento.valor }}</span>
+        </dd>
+        <dt><span jhiTranslate="imasfsaudeApp.pagamento.valorDesconto">Valor Desconto</span></dt>
+        <dd>
+          <span>{{ pagamento.valorDesconto }}</span>
+        </dd>
+        <dt><span jhiTranslate="imasfsaudeApp.pagamento.valorAcrescimo">Valor Acrescimo</span></dt>
+        <dd>
+          <span>{{ pagamento.valorAcrescimo }}</span>
+        </dd>
+        <dt><span jhiTranslate="imasfsaudeApp.pagamento.valorPago">Valor Pago</span></dt>
+        <dd>
+          <span>{{ pagamento.valorPago }}</span>
+        </dd>
+        <dt><span jhiTranslate="imasfsaudeApp.pagamento.status">Status</span></dt>
+        <dd>
+          <span jhiTranslate="{{ 'imasfsaudeApp.StatusPagamento.' + pagamento.status }}">{{ pagamento.status }}</span>
+        </dd>
+        <dt><span jhiTranslate="imasfsaudeApp.pagamento.conta">Conta</span></dt>
+        <dd>
+          <div *ngIf="pagamento.conta">
+            <a [routerLink]="['/conta', pagamento.conta?.id, 'view']">{{ pagamento.conta?.id }}</a>
+          </div>
+        </dd>
+      </dl>
+
+      <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+      </button>
+
+      <button type="button" [routerLink]="['/pagamento', pagamento.id, 'edit']" class="btn btn-primary">
+        <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+      </button>
+    </div>
+  </div>
+</div>

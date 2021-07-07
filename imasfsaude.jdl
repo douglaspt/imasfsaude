@@ -1,0 +1,93 @@
+
+entity Conta {
+	id	Long,
+    competencia	LocalDate,
+	status	StatusPagamento 
+}
+
+entity Pagamento {
+	id Long,
+    descricao String,
+    emissao	LocalDate,
+    vencimento LocalDate,
+	valor BigDecimal,
+    valorDesconto BigDecimal,
+    valorAcrescimo BigDecimal,
+    valorPago BigDecimal,
+    status StatusPagamento 
+}
+
+enum StatusPagamento {
+    PENDENTE, PAGO, CANCELADO
+}
+
+entity Procedimento {
+	id	Long,
+    descricao String,
+    quantidade	Integer,
+    valorInformado BigDecimal,
+    valorPago	BigDecimal,
+    glosa BigDecimal 
+}
+
+entity Plano {
+	id	Long,
+	nome String,
+	valor BigDecimal
+}
+
+entity Cep {
+	id Long,
+	logradouro	String,
+	bairro String,
+    cidade	String,
+	UF String
+}
+
+entity Beneficiario {
+	id Long,
+    nome String,
+    cpf	String,
+    rg	String,
+    email String,
+    status	Status 
+}
+
+entity Conveniado {
+	id	Long,
+    nome String,
+    cnpj String,
+    contrato String,
+    rg String,
+    email String,
+    telefone String,
+    status Status 
+}
+
+enum Status {
+    ATIVO, INATIVO, SUSPENSO
+}
+
+relationship OneToOne {
+	Conta{beneficiario} to Beneficiario,
+    Conta{Conveniado} to Conveniado,
+    Conveniado{cep} to Cep,
+    Beneficiario{cep} to Cep,
+    Pagamento{conta} to Conta,
+    Beneficiario{plano} to Plano
+}
+
+relationship OneToMany {
+    Conta to Procedimento{conta}
+}
+
+// Set pagination options
+paginate Plano, Pagamento with infinite-scroll
+paginate Conta, Conveniado, Beneficiario with pagination
+
+
+// Set service options to all except few
+service all with serviceImpl 
+
+// Set an angular suffix
+// angularSuffix * with mySuffix

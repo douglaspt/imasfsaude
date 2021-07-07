@@ -1,0 +1,60 @@
+<div class="row justify-content-center">
+  <div class="col-8">
+    <div *ngIf="beneficiario">
+      <h2 data-cy="beneficiarioDetailsHeading"><span jhiTranslate="imasfsaudeApp.beneficiario.detail.title">Beneficiario</span></h2>
+
+      <hr />
+
+      <jhi-alert-error></jhi-alert-error>
+
+      <jhi-alert></jhi-alert>
+
+      <dl class="row-md jh-entity-details">
+        <dt><span jhiTranslate="imasfsaudeApp.beneficiario.id">Id</span></dt>
+        <dd>
+          <span>{{ beneficiario.id }}</span>
+        </dd>
+        <dt><span jhiTranslate="imasfsaudeApp.beneficiario.nome">Nome</span></dt>
+        <dd>
+          <span>{{ beneficiario.nome }}</span>
+        </dd>
+        <dt><span jhiTranslate="imasfsaudeApp.beneficiario.cpf">Cpf</span></dt>
+        <dd>
+          <span>{{ beneficiario.cpf }}</span>
+        </dd>
+        <dt><span jhiTranslate="imasfsaudeApp.beneficiario.rg">Rg</span></dt>
+        <dd>
+          <span>{{ beneficiario.rg }}</span>
+        </dd>
+        <dt><span jhiTranslate="imasfsaudeApp.beneficiario.email">Email</span></dt>
+        <dd>
+          <span>{{ beneficiario.email }}</span>
+        </dd>
+        <dt><span jhiTranslate="imasfsaudeApp.beneficiario.status">Status</span></dt>
+        <dd>
+          <span jhiTranslate="{{ 'imasfsaudeApp.Status.' + beneficiario.status }}">{{ beneficiario.status }}</span>
+        </dd>
+        <dt><span jhiTranslate="imasfsaudeApp.beneficiario.cep">Cep</span></dt>
+        <dd>
+          <div *ngIf="beneficiario.cep">
+            <a [routerLink]="['/cep', beneficiario.cep?.id, 'view']">{{ beneficiario.cep?.id }}</a>
+          </div>
+        </dd>
+        <dt><span jhiTranslate="imasfsaudeApp.beneficiario.plano">Plano</span></dt>
+        <dd>
+          <div *ngIf="beneficiario.plano">
+            <a [routerLink]="['/plano', beneficiario.plano?.id, 'view']">{{ beneficiario.plano?.id }}</a>
+          </div>
+        </dd>
+      </dl>
+
+      <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+      </button>
+
+      <button type="button" [routerLink]="['/beneficiario', beneficiario.id, 'edit']" class="btn btn-primary">
+        <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+      </button>
+    </div>
+  </div>
+</div>

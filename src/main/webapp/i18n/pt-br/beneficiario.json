@@ -1,0 +1,30 @@
+{
+  "imasfsaudeApp": {
+    "beneficiario": {
+      "home": {
+        "title": "Beneficiarios",
+        "refreshListLabel": "Atualizar lista",
+        "createLabel": "Criar novo Beneficiario",
+        "createOrEditLabel": "Criar ou editar Beneficiario",
+        "notFound": "Nenhum Beneficiario encontrado"
+      },
+      "created": "Um novo Beneficiario foi criado com o identificador {{ param }}",
+      "updated": "Um Beneficiario foi atualizado com o identificador {{ param }}",
+      "deleted": "Um Beneficiario foi excluído com o identificador {{ param }}",
+      "delete": {
+        "question": "Tem certeza de que deseja excluir Beneficiario {{ id }}?"
+      },
+      "detail": {
+        "title": "Beneficiario"
+      },
+      "id": "Id",
+      "nome": "Nome",
+      "cpf": "Cpf",
+      "rg": "Rg",
+      "email": "Email",
+      "status": "Status",
+      "cep": "Cep",
+      "plano": "Plano"
+    }
+  }
+}

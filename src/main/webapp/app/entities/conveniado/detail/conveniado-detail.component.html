@@ -1,0 +1,62 @@
+<div class="row justify-content-center">
+  <div class="col-8">
+    <div *ngIf="conveniado">
+      <h2 data-cy="conveniadoDetailsHeading"><span jhiTranslate="imasfsaudeApp.conveniado.detail.title">Conveniado</span></h2>
+
+      <hr />
+
+      <jhi-alert-error></jhi-alert-error>
+
+      <jhi-alert></jhi-alert>
+
+      <dl class="row-md jh-entity-details">
+        <dt><span jhiTranslate="imasfsaudeApp.conveniado.id">Id</span></dt>
+        <dd>
+          <span>{{ conveniado.id }}</span>
+        </dd>
+        <dt><span jhiTranslate="imasfsaudeApp.conveniado.nome">Nome</span></dt>
+        <dd>
+          <span>{{ conveniado.nome }}</span>
+        </dd>
+        <dt><span jhiTranslate="imasfsaudeApp.conveniado.cnpj">Cnpj</span></dt>
+        <dd>
+          <span>{{ conveniado.cnpj }}</span>
+        </dd>
+        <dt><span jhiTranslate="imasfsaudeApp.conveniado.contrato">Contrato</span></dt>
+        <dd>
+          <span>{{ conveniado.contrato }}</span>
+        </dd>
+        <dt><span jhiTranslate="imasfsaudeApp.conveniado.rg">Rg</span></dt>
+        <dd>
+          <span>{{ conveniado.rg }}</span>
+        </dd>
+        <dt><span jhiTranslate="imasfsaudeApp.conveniado.email">Email</span></dt>
+        <dd>
+          <span>{{ conveniado.email }}</span>
+        </dd>
+        <dt><span jhiTranslate="imasfsaudeApp.conveniado.telefone">Telefone</span></dt>
+        <dd>
+          <span>{{ conveniado.telefone }}</span>
+        </dd>
+        <dt><span jhiTranslate="imasfsaudeApp.conveniado.status">Status</span></dt>
+        <dd>
+          <span jhiTranslate="{{ 'imasfsaudeApp.Status.' + conveniado.status }}">{{ conveniado.status }}</span>
+        </dd>
+        <dt><span jhiTranslate="imasfsaudeApp.conveniado.cep">Cep</span></dt>
+        <dd>
+          <div *ngIf="conveniado.cep">
+            <a [routerLink]="['/cep', conveniado.cep?.id, 'view']">{{ conveniado.cep?.id }}</a>
+          </div>
+        </dd>
+      </dl>
+
+      <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+      </button>
+
+      <button type="button" [routerLink]="['/conveniado', conveniado.id, 'edit']" class="btn btn-primary">
+        <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+      </button>
+    </div>
+  </div>
+</div>

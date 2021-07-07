@@ -1,0 +1,25 @@
+{
+  "imasfsaudeApp": {
+    "plano": {
+      "home": {
+        "title": "Planos",
+        "refreshListLabel": "Atualizar lista",
+        "createLabel": "Criar novo Plano",
+        "createOrEditLabel": "Criar ou editar Plano",
+        "notFound": "Nenhum Plano encontrado"
+      },
+      "created": "Um novo Plano foi criado com o identificador {{ param }}",
+      "updated": "Um Plano foi atualizado com o identificador {{ param }}",
+      "deleted": "Um Plano foi excluído com o identificador {{ param }}",
+      "delete": {
+        "question": "Tem certeza de que deseja excluir Plano {{ id }}?"
+      },
+      "detail": {
+        "title": "Plano"
+      },
+      "id": "Id",
+      "nome": "Nome",
+      "valor": "Valor"
+    }
+  }
+}
